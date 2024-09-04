@@ -1,12 +1,23 @@
-import React from 'react';
-import GameComponent from './component/GameComponent';  // GameComponent의 경로를 맞게 수정하세요.
+import React, { useState } from 'react';
+import RoomList from './component/RoomList';
+import RoomComponent from './component/RoomComponent';
 
-function App() {
-  return (
-      <div className="App">
-        <GameComponent />
-      </div>
-  );
-}
+const App = () => {
+    const [selectedRoomId, setSelectedRoomId] = useState(null);
+
+    const handleJoinRoom = (roomId) => {
+        setSelectedRoomId(roomId);
+    };
+
+    return (
+        <div>
+            {selectedRoomId ? (
+                <RoomComponent roomId={selectedRoomId} />
+            ) : (
+                <RoomList onJoinRoom={handleJoinRoom} />
+            )}
+        </div>
+    );
+};
 
 export default App;
